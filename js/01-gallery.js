@@ -5,7 +5,7 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 const galleryEl = document.querySelector(".gallery");
 galleryEl.addEventListener("click", onMakeBiggestImage);
-//window.addEventListener("keydown", onCloseModal)
+window.addEventListener("keydown", onCloseModal)
 const galleryList = galleryItems.map(({ preview, original, description }) => {
     return `<div class="gallery__item"><a class="gallery__link" href="${original}">
     <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}"></a></div>`
@@ -14,22 +14,18 @@ const galleryList = galleryItems.map(({ preview, original, description }) => {
 galleryEl.insertAdjacentHTML("beforeend", galleryList);
 
 
+let instance
 
-
-function onMakeBiggestImage(evt, e) {
+function onMakeBiggestImage(evt) {
     evt.preventDefault();
     
-  const instance = basicLightbox.create(`
+    instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}">
 `);
-    instance.show() 
-
-   // if(e.code === "Escape") {
-    //   instance.close()
-    //   }
+    instance.show()
 }
 
-//function onCloseModal (evt) { if (evt.code === "Escape") {
-//        instance.close()
-//        }}
+function onCloseModal (evt) { if (evt.code === "Escape") {
+       instance.close()
+       }}
 
