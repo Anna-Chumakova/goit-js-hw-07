@@ -12,7 +12,8 @@ const galleryList = galleryItems.map(({ preview, original, description }) => {
 }).join(" ");
 galleryRef.insertAdjacentHTML("beforeend", galleryList);
 
- const gallerySlide = new SimpleLightbox(".gallery a", {
-  captionsData: "alt",
-  captionDelay: 250,
+  new SimpleLightbox(".gallery a", {
+      captionsType: "alt",
+      captionsPosition: "bottom",
+      captionDelay: 250,
 });

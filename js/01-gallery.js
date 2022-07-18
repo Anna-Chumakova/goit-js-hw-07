@@ -5,7 +5,7 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 const galleryEl = document.querySelector(".gallery");
 galleryEl.addEventListener("click", onMakeBiggestImage);
-window.addEventListener("keydown", onCloseModal)
+
 const galleryList = galleryItems.map(({ preview, original, description }) => {
     return `<div class="gallery__item"><a class="gallery__link" href="${original}">
     <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}"></a></div>`
@@ -18,11 +18,14 @@ let instance
 
 function onMakeBiggestImage(evt) {
     evt.preventDefault();
-    
-    instance = basicLightbox.create(`
+    if (evt.target === img) {
+         instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}">
 `);
-    instance.show()
+        instance.show()
+    }
+    window.addEventListener("keydown", onCloseModal);
+    window.removeEventListener('keydown', onCloseModal)
 }
 
 function onCloseModal (evt) { if (evt.code === "Escape") {
