@@ -18,17 +18,20 @@ let instance
 
 function onMakeBiggestImage(evt) {
     evt.preventDefault();
-    if (evt.target === img) {
+    if (evt.currentTarget === evt.target) {
+        return;
+    } 
          instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}">
 `);
         instance.show()
-    }
+    
     window.addEventListener("keydown", onCloseModal);
-    window.removeEventListener('keydown', onCloseModal)
+  
 }
 
 function onCloseModal (evt) { if (evt.code === "Escape") {
-       instance.close()
+    instance.close()
+    window.removeEventListener('keydown', onCloseModal)
        }}
 

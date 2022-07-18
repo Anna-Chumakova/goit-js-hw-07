@@ -14,6 +14,7 @@ galleryRef.insertAdjacentHTML("beforeend", galleryList);
 
   new SimpleLightbox(".gallery a", {
       captionsType: "alt",
+      captionsData: "alt",
       captionsPosition: "bottom",
       captionDelay: 250,
 });
